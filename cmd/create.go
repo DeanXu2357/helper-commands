@@ -6,28 +6,30 @@ package cmd
 
 import (
 	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
+var path string
+
 // createCmd represents the create command
 var createCmd = &cobra.Command{
-	Use:   "create",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use:   "create [entity import] [entity name]",
+	Short: "生成 repository 檔案",
+	Long:  ``,
+	Args:  cobra.MinimumNArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("create called")
+
+		g := NewGenerator(args[0], args[1], path)
+
+		cobra.CheckErr(g.Create())
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(createCmd)
 
+	createCmd.PersistentFlags().StringVar(&path, "Path", "", "")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
