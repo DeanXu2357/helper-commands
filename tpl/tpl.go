@@ -22,9 +22,9 @@ type {{ .EntityName }}Repo interface {
 	{{ .EntityName }}(ctx context.Context, id string) (*imp.{{ .EntityName }}, error)
 	Update(ctx context.Context, id string, modify interface{}) error
 	Delete(ctx context.Context, id string) error
-	Create(ctx context.Context, user *imp.{{ .EntityName }}) error
+	Create(ctx context.Context, entity *imp.{{ .EntityName }}) error
 	Query(ctx context.Context, filters ...{{ .EntityName }}Filter) ([]imp.{{ .EntityName }}, error)
-	ByPage(ctx context.Context, page, limit int64, filters ...UserFilter) ([]imp.{{ .EntityName }}, error)
+	ByPage(ctx context.Context, page, limit int64, filters ...{{ .EntityName }}Filter) ([]imp.{{ .EntityName }}, error)
 }
 
 type repo struct {
@@ -120,7 +120,7 @@ func (r repo) Query(ctx context.Context, filters ...{{ .EntityName }}Filter) ([]
 		} else if driver.IsNoMoreDocuments(err) {
 			break
 		} else if err != nil {
-			return nil, fmt.Errorf("userRepo query failed: %v", err)
+			return nil, fmt.Errorf("{{ .EntityName }}Repo query failed: %v", err)
 		}
 
 		entities = append(entities, e)
@@ -129,7 +129,7 @@ func (r repo) Query(ctx context.Context, filters ...{{ .EntityName }}Filter) ([]
 	return entities, nil
 }
 
-func (r repo) ByPage(ctx context.Context, page, limit int64, filters ...UserFilter) ([]imp.{{ .EntityName }}, error) {
+func (r repo) ByPage(ctx context.Context, page, limit int64, filters ...{{ .EntityName }}Filter) ([]imp.{{ .EntityName }}, error) {
 	var entities []imp.{{ .EntityName }}
 
 	var f string
@@ -170,7 +170,7 @@ func (r repo) ByPage(ctx context.Context, page, limit int64, filters ...UserFilt
 		} else if driver.IsNoMoreDocuments(err) {
 			break
 		} else if err != nil {
-			return nil, fmt.Errorf("userRepo query failed: %v", err)
+			return nil, fmt.Errorf("{{ .EntityName }}Repo query failed: %v", err)
 		}
 
 		entities = append(entities, e)
