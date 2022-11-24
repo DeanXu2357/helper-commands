@@ -1,4 +1,4 @@
-module github.com/DeanXu2357/arangodb-repo-gen
+module github.com/DeanXu2357/helper-commands
 
 go 1.18
 

@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/DeanXu2357/arangodb-repo-gen/tpl"
+	"github.com/DeanXu2357/helper-commands/tpl"
 	"log"
 	"os"
 	"regexp"

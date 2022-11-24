@@ -7,7 +7,7 @@ package cmd
 import (
 	"errors"
 	"fmt"
-	"github.com/DeanXu2357/arangodb-repo-gen/tpl"
+	"github.com/DeanXu2357/helper-commands/tpl"
 	"github.com/spf13/cobra"
 	"log"
 	"os"
