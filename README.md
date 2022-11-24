@@ -1,6 +1,6 @@
 # helper-commands
 
-##arangodb-repo-gen 
+## arangodb-repo-gen 
 
 arangodb 的 curd repo 生成器，根據傳入 entity struct 生成對應的 repository 。
 
