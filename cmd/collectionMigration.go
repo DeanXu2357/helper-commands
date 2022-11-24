@@ -44,9 +44,9 @@ func init() {
 }
 
 type createColGenerator struct {
-	path           string
-	version        string
-	collectionName string
+	Path           string
+	Version        string
+	CollectionName string
 }
 
 func NewCreateCollectionGenerator(colName string) *createColGenerator {
@@ -60,18 +60,18 @@ func NewCreateCollectionGenerator(colName string) *createColGenerator {
 	}
 
 	return &createColGenerator{
-		path:           fmt.Sprintf("%s/migrations/%s", root, fileName),
-		version:        version,
-		collectionName: colName,
+		Path:           fmt.Sprintf("%s/migrations/%s", root, fileName),
+		Version:        version,
+		CollectionName: colName,
 	}
 }
 
 func (g *createColGenerator) Create() error {
-	if _, err := os.Stat(g.path); os.IsExist(err) {
+	if _, err := os.Stat(g.Path); os.IsExist(err) {
 		return errors.New("file already exist")
 	}
 
-	cmdFile, err := os.Create(g.path)
+	cmdFile, err := os.Create(g.Path)
 	if err != nil {
 		return err
 	}
