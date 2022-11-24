@@ -9,8 +9,12 @@ arangodb 的 curd repo 生成器，根據傳入 entity struct 生成對應的 re
 
 ### 使用方法
 
+#### 新增 repo 程式碼
 * 執行  
-`arangodb-repo-gen create [entity import] [entity name]`  
+`helper-commands create [entity import] [entity name]`  
 ex:  
-`go run main.go  create github.com/DeanXu2357/arangodb-repo-gen/entity User`
+`go run main.go  create github.com/DeanXu2357/arangodb-repo-gen/User User`
 
+#### 新增 migration 創建 collection
+* 執行
+`helper-commands collectionMigration [collection name]`
