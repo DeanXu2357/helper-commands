@@ -4,18 +4,18 @@ func MigrationCreateTemplate() []byte {
 	return []byte(`
 const _ = require('lodash');
 const { logger } = require('.');
-const currentVersion = '{{ .version }}';
+const currentVersion = '{{ .Version }}';
 
 module.exports.Execute = async (db, aql, logger, env) => {
     try {
-        const defaultCol = db.collection('{{ .colName }}');
+        const defaultCol = db.collection('{{ .ColName }}');
 
         const hasDefaultCol = await defaultCol.exists();
 
 
         // ensure collections
         if (!hasDefaultCol) {
-            await db.createCollection('{{ .colName }}')
+            await db.createCollection('{{ .ColName }}')
         }
 
         const cursor = await db.query(aql` + "`" + `
@@ -29,8 +29,8 @@ module.exports.Execute = async (db, aql, logger, env) => {
             return;
         }
 
-        // update the schema version to {{ .version }}
-        logger.info('update the schema version the {{ .version }}');
+        // update the schema version to {{ .Version }}
+        logger.info('update the schema version the {{ .Version }}');
         await db.collection('Versions').save(
             {
                 migrationNumber: currentVersion,
@@ -56,7 +56,7 @@ module.exports.Rollback = async (db, aql, logger, env) => {
 	` + "`" + `);
         const currentMigration = await cursor.next();
 
-        await dropCollection(db, '{{ .colName }}');
+        await dropCollection(db, '{{ .ColName }}');
 
         // 移除 Migration
         await versionsCol.remove(currentMigration);
