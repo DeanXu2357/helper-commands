@@ -50,9 +50,9 @@ type createColGenerator struct {
 }
 
 func NewCreateCollectionGenerator(colName string) *createColGenerator {
-	version := time.Now().Format("20060102")
+	version := fmt.Sprintf("%s_Create_%s_Collection", time.Now().Format("20060102"), colName)
 
-	fileName := fmt.Sprintf("%s_Create_%s_Collection.js", version, colName)
+	fileName := fmt.Sprintf("%s.js", version)
 
 	root, err := os.Getwd()
 	if err != nil {
