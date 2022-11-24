@@ -62,10 +62,10 @@ func initConfig() {
 		home, err := os.UserHomeDir()
 		cobra.CheckErr(err)
 
-		// Search config in home directory with name ".arangodb-repo-gen" (without extension).
+		// Search config in home directory with name ".helper-commands" (without extension).
 		viper.AddConfigPath(home)
 		viper.SetConfigType("yaml")
-		viper.SetConfigName(".arangodb-repo-gen")
+		viper.SetConfigName(".helper-commands")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match
