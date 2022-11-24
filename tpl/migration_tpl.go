@@ -8,14 +8,14 @@ const currentVersion = '{{ .Version }}';
 
 module.exports.Execute = async (db, aql, logger, env) => {
     try {
-        const defaultCol = db.collection('{{ .ColName }}');
+        const defaultCol = db.collection('{{ .CollectionName }}');
 
         const hasDefaultCol = await defaultCol.exists();
 
 
         // ensure collections
         if (!hasDefaultCol) {
-            await db.createCollection('{{ .ColName }}')
+            await db.createCollection('{{ .CollectionName }}')
         }
 
         const cursor = await db.query(aql` + "`" + `
@@ -56,7 +56,7 @@ module.exports.Rollback = async (db, aql, logger, env) => {
 	` + "`" + `);
         const currentMigration = await cursor.next();
 
-        await dropCollection(db, '{{ .ColName }}');
+        await dropCollection(db, '{{ .CollectionName }}');
 
         // 移除 Migration
         await versionsCol.remove(currentMigration);
